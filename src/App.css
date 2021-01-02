@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+
+.container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1170px;
+  margin: auto;
+}
+
+.cta-button {
+  padding: 1em 3em;
+  color: white;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.cta-button--blue {
+  background-color: #61dafb;
+  color: black;
+}
+
+.cta-button--blue:hover{
+	background-color: #e8f0eb;
+}
+
+.cta-button--red {
+  background-color: #fb6161;
+  color: black;
+}
+
+.cta-button--red:hover{
+	background-color: #e8f0eb;
+}
