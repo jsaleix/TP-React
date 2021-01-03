@@ -55,6 +55,8 @@
   transition: background-color 0.3s;
   letter-spacing: 0.05em;
   text-align: center;
+  outline: none;
+  border: none;
 }
 
 .cta-button--blue {
@@ -73,4 +75,13 @@
 
 .cta-button--red:hover{
 	background-color: #e8f0eb;
+}
+
+.cta-button--green {
+  background-color: #afa3a3;
+  color: black;
+}
+
+.cta-button--green:hover{
+  background-color: #78fb61;
 }

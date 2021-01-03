@@ -9,7 +9,9 @@ a{
 }
 
 #logo{
-    width: 140px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 header nav{

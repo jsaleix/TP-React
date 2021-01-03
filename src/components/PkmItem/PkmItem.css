@@ -1,0 +1,37 @@
+.pkm-card{
+    text-align: center;
+    margin-bottom: 5em;
+    transition: 0.5s;
+}
+
+.pkm-card:hover{
+    transform: scale(1.10, 1.10);
+    transition: 0.5s;
+}
+
+.pkm-picture{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.pkm-card, .selected h2{
+    text-transform: uppercase;
+}
+
+.selected{
+    z-index: 10000;
+    text-align: center;
+    margin-bottom: 5em;
+    transition: 0.5s;
+    align-self: stretch;
+    align-self: center;
+    /*flex: 1;
+    text-align: center;
+    margin-bottom: 5em;
+    transition: 0.5s;*/
+}
+
+.hidden{
+    display: none;
+}
