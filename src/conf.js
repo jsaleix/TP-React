@@ -17,5 +17,8 @@ var PKM_DEF_PICTURE = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail
 var PKM_PICTURE     = "https://naramsim.github.io/Colosseum/images/pokemons/";
 export { PKM_DEF_PICTURE, PKM_PICTURE }
 
+var PKM_TYPE = "https://naramsim.github.io/Colosseum/images/types/";
+export { PKM_TYPE }
+
 var MAX_PKM_NB = 898;
 export { MAX_PKM_NB }

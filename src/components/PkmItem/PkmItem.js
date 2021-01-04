@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PkmItem.css';
 import { PKM_DEF_PICTURE, PKM_PICTURE, MAX_PKM_NB } from '../../conf.js';
 
-export default function PkmItem({data, action, selectedPkm, extraData}){
+export default function PkmItem({data, action, selectedPkm, extraData, extraType = "pkm"}){
     if(data.id < MAX_PKM_NB){
         if(data.id > 719 ){
             var imgLink = `${PKM_DEF_PICTURE}${data.id}.png`;
@@ -15,15 +15,19 @@ export default function PkmItem({data, action, selectedPkm, extraData}){
     }
 
     const _clickOnPkm = () => {
-        if(selectedPkm === data.id){
+        if(selectedPkm === data.id || selectedPkm === data.name){
             action(null);
         }else{
-            action(data.id);
+            if(extraType === "news"){
+                action(data.name);
+            }else{
+                action(data.id);
+            }
         }
     }
 
     const _displayExtraData = () => {
-        if(selectedPkm === data.id){
+        if(selectedPkm === data.id || selectedPkm === data.name){
             return(
                 extraData()
             )
@@ -32,7 +36,7 @@ export default function PkmItem({data, action, selectedPkm, extraData}){
 
     const whichClass = () => {
         if(selectedPkm){
-            if(selectedPkm === data.id){
+            if(selectedPkm === data.id || selectedPkm === data.name){
                 return "selected";
             }else{
                 return "hidden"
@@ -46,7 +50,7 @@ export default function PkmItem({data, action, selectedPkm, extraData}){
     return(
         <article className={whichClass()} onClick={() => _clickOnPkm() }>
             <img src={imgLink } className="pkm-picture" alt="pkm-pic"/>
-            <h2>{data.name}</h2>
+            <h2>{data.id} - {data.name}</h2>
             {_displayExtraData()}
         </article>
     )

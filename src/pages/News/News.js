@@ -9,6 +9,7 @@ export default function News(){
     const [ lang, setLang ]         = useState("en");
     const [ search, setSearch ]     = useState("pokemon");
     const [ newsList, setNewsList]  = useState(null);
+    var availableLang = ["en", "fr", "es", "ja", "kn", "ru", "de"];
 
     const fetchNews = async () => {
         setLoading(true);
@@ -62,11 +63,14 @@ export default function News(){
             <div className="filters-container">
                 <div>
                     <label>Lang</label>
-                    <input type="text" onChange={(e) => _handleInput(e.target.value, "lang")} value={lang}/>
+                    <select onChange={(e) => _handleInput(e.target.value, "lang")}>
+                        {availableLang.map( (langOpt) => <option value={langOpt} checked={langOpt === lang ? true : false}>{langOpt}</option>)}
+
+                    </select>                
                 </div>
 
                 <div>                
-                    <label>topic</label>
+                    <label>Topic</label>
                     <input type="text" onChange={(e) => _handleInput(e.target.value, "search")} value={search}/>
                 </div>
             </div>

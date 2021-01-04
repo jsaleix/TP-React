@@ -2,7 +2,11 @@
 
 html,body{
   font-family: 'Lato', cursive;
+  background-color:#20232a;
+}
 
+body{
+  background-color: white;
 }
 
 .App {

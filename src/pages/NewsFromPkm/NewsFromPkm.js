@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PkmItem from '../../components/PkmItem/PkmItem';
-import PokedexExtraData from '../../components/PokedexExtraData/PokedexExtraData';
-import { PKM_GET_LIST, PKM_GET_DATA, MAX_PKM_NB } from '../../conf.js'; 
+import PokemonNews from '../../components/PokemonNews/PokemonNews';
+import { PKM_GET_LIST, MAX_PKM_NB, NEWS_SEARCH, NEWS_API_KEY } from '../../conf.js'; 
 import '../../App.css'; 
-import './Pokedex.css';
+import './NewsFromPkm.css';
 
-export default function Pokedex(){
+export default function NewsFromPkm(){
     const [ loading, setLoading] = useState(true);
     const [ pkmList, setPkmList] = useState(null);
-    const [ offSet, setOffSet ]  = useState("389");
+    const [ offSet, setOffSet ]  = useState("0");
     const [ limit, setLimit ]    = useState(10);
+    const [ lang, setLang ]      = useState("en");
     const [selectedPkm, setSelectedPkm] = useState(null);
     const [ extraData, setExtraData ]   = useState(null);
 
@@ -34,53 +35,33 @@ export default function Pokedex(){
         setLoading(false);
     }
 
-    const fetchPkmData = async () => {
+    const fetchNews = async () => {
         setLoading(true);
         try{
-            var res = await fetch(`${PKM_GET_DATA}${selectedPkm}/`)
+            var res = await fetch(`${NEWS_SEARCH}?q=${selectedPkm}&lang=${lang}&media=True&sort_by=relevancy`, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": NEWS_API_KEY,
+                    "x-rapidapi-host": "newscatcher.p.rapidapi.com"
+                }
+            })
             .then((res) => res.json())
             .catch((e) => {});
-            
-            var extra = await fetch(res.species.url)
-            .then((res) => res.json())
-            .catch((e) => {});
-
-            if(!res.abilities){ throw {message: "Not found"}};
-            var tmpTypes = [], tmpAbilities = [], tmpNames = [];
-
-            res.types.forEach( type => {
-                tmpTypes.push(type.type.name)
-            })
-
-            res.abilities.forEach( ability => {
-                tmpAbilities.push(ability.ability.name)
-            })
-
-            extra.names.forEach( name => {
-                tmpNames.push({lang: name.language.name, name: name.name})
-            })
-
-            setExtraData({  
-                abilities:       tmpAbilities, 
-                base_experience: res.base_experience, 
-                types:           tmpTypes,
-                descriptions:    extra.flavor_text_entries,
-                names:           tmpNames
-            });
-
+            console.log(res);
+            setExtraData(res.articles);
         }catch(e){
-            console.error(e);
+            console.error(e)
         }
         setLoading(false);
-
     }
 
     const _pkmData = () => {
         if(extraData)
         {
             return(
-                <PokedexExtraData data={extraData}/>
-            
+                <div className="news-cards">
+                    {extraData.map((news) => <PokemonNews key={news._id} data={news} />)}
+                </div>
             )
         }
     }
@@ -90,7 +71,7 @@ export default function Pokedex(){
             return(
                 <>
                 <div className="pkm-cards">
-                    {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} />)}
+                    {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} extraType="news" />)}
                 </div>
                 {!selectedPkm && <div className="dex-container">
                     <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 10)}>More</button>
@@ -116,8 +97,7 @@ export default function Pokedex(){
 
     useEffect( () => {
         if(selectedPkm){
-            setExtraData(null);
-            fetchPkmData();
+            fetchNews();
         }
     }, [selectedPkm]);
 

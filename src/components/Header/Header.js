@@ -16,7 +16,7 @@ export default function Header(){
                         <li><a href="/" >Home</a></li>
                         <li><a href="/pokedex" >Pokedex</a></li>
                         <li><a href="/news" >Search news</a></li>
-                        <li><a href="/" >News from Pokemon</a></li>
+                        <li><a href="/pokeNews" >News from Pokemon</a></li>
                     </ul>
                 </nav>
             </div>
