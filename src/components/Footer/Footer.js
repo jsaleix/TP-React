@@ -6,7 +6,7 @@ export default function Footer(){
     return(
         <footer className="footer">
             <div className="container">
-                <p>Copyright © 2021</p>
+                <p>Julian Saleix - TP React</p>
             </div>
         </footer>
     )

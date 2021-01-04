@@ -9,11 +9,16 @@
 
 .news-cards{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     max-width: 1170px;
     margin: auto;
     flex-wrap: wrap;
+}
+
+#gyarados{
+    width: 260px;
 }
 
 .news-div{

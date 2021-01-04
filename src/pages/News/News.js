@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './News.css'
 import NewItem from '../../components/NewItem/NewItem';
 import { NEWS_SEARCH, NEWS_FREE_SEARCH, NEWS_API_KEY } from '../../conf.js'; 
+import loadingImg from '../../assets/loading.gif'
+import NoContent from '../../assets/noName2.gif' 
 
 export default function News(){
     const [ loading, setLoading]    = useState(true);
     const [ lang, setLang ]         = useState("en");
     const [ search, setSearch ]     = useState("pokemon");
     const [ newsList, setNewsList]  = useState(null);
-    var availableLang = ["en", "fr", "es", "ja", "kn", "ru", "de"];
+    var availableLang               = ["en", "fr", "es", "ja", "kn", "ru", "de"];
 
     const fetchNews = async () => {
         setLoading(true);
@@ -35,9 +37,15 @@ export default function News(){
         if(newsList){
             return(
                 <div className="news-cards">
-                {newsList.map((news) => <NewItem key={news._id} data={news} />)}
+                    {newsList.map((news) => <NewItem key={news._id} data={news} />)}
                 </div>
-                
+            )
+        }else{
+            return (
+                <div className="news-cards">
+                    <img id="gyarados" src={NoContent} />
+                    <h2>No results...</h2>
+                </div>
             )
         }
     }
@@ -62,20 +70,19 @@ export default function News(){
             </div>
             <div className="filters-container">
                 <div>
-                    <label>Lang</label>
+                    <label>Lang </label>
                     <select onChange={(e) => _handleInput(e.target.value, "lang")}>
-                        {availableLang.map( (langOpt) => <option value={langOpt} checked={langOpt === lang ? true : false}>{langOpt}</option>)}
-
+                        {availableLang.map( (langOpt) => <option key={langOpt} value={langOpt} checked={langOpt === lang ? true : false}>{langOpt}</option>)}
                     </select>                
                 </div>
 
                 <div>                
-                    <label>Topic</label>
+                    <label>Topic </label>
                     <input type="text" onChange={(e) => _handleInput(e.target.value, "search")} value={search}/>
                 </div>
             </div>
             <section className="results">
-                {_renderNews()}
+                {loading ? <img src={loadingImg}/> : _renderNews()}
             </section>
         </div>
     )

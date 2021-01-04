@@ -35,9 +35,26 @@ export default function PokedexExtraData({data}){
     }
 
     const _renderNames = () => {
+        var i = 0;
+
         return(
             <div className="names-container">
-                {names.map( (name) => <p onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p> )}
+                {names.map( (name) => {
+                    if(i< 3){
+                        i++;
+                        return(
+                            <p className="anim-delay-500ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>
+                        )
+                    }else if(i<6){
+                        i++;
+                        return (<p className="anim-delay-1000ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                    }else if(i<9){
+                        i++;
+                        return (<p className="anim-delay-1500ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                    }else{
+                        return (<p className="anim-delay-2000ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                    }
+                })}
             </div>
         )
     }

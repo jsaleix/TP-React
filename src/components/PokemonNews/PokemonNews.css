@@ -66,7 +66,7 @@
     background-color: #939494;
 }
 
-.article-item-content .btn{
+.article-item-content .article-btn{
     width: fit-content();
     margin-right: 2em;
     padding: 1em 3em;
@@ -80,4 +80,8 @@
     border: none;
     margin-top: 0;
     background-color: #939494;
+}
+
+.article-item-content .article-btn:hover{
+    background-color: rgb(3, 148, 148);
 }

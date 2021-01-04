@@ -4,34 +4,39 @@ import PokedexExtraData from '../../components/PokedexExtraData/PokedexExtraData
 import { PKM_GET_LIST, PKM_GET_DATA, MAX_PKM_NB } from '../../conf.js'; 
 import '../../App.css'; 
 import './Pokedex.css';
+import loadingImg from '../../assets/loading.gif' // relative path to image 
 
 export default function Pokedex(){
     const [ loading, setLoading] = useState(true);
     const [ pkmList, setPkmList] = useState(null);
     const [ offSet, setOffSet ]  = useState("389");
-    const [ limit, setLimit ]    = useState(10);
+    const [ limit, setLimit ]    = useState(6);
     const [selectedPkm, setSelectedPkm] = useState(null);
     const [ extraData, setExtraData ]   = useState(null);
 
     const fetchPkm = async() => {
         setLoading(true);
         try{
-            var res = await fetch(`${PKM_GET_LIST}limit=${limit}&offset=${offSet}`)
-            .then((res) => res.json())
-            .catch((e) => {});
+            setTimeout(async () => {
+                var res = await fetch(`${PKM_GET_LIST}limit=${limit}&offset=${offSet}`)
+                .then((res) => res.json())
+                .catch((e) => {});
 
-            var tmpList = [];
-            res.results.forEach.call(res.results, pkm => {
-                var idPkm = (pkm.url).split("https://");
-                idPkm     = (idPkm[1]).split("/")[4];
-                let newPkm = {name: pkm.name, id: idPkm}
-                tmpList.push(newPkm);
-            })
-            setPkmList(tmpList);
+                var tmpList = [];
+                res.results.forEach.call(res.results, pkm => {
+                    var idPkm = (pkm.url).split("https://");
+                    idPkm     = (idPkm[1]).split("/")[4];
+                    let newPkm = {name: pkm.name, id: idPkm}
+                    tmpList.push(newPkm);
+                })
+                setPkmList(tmpList);
+                setLoading(false);
+
+            }, pkmList ? 0 : 1500)
         }catch(e){
             console.error(e);
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     const fetchPkmData = async () => {
@@ -92,17 +97,20 @@ export default function Pokedex(){
                 <div className="pkm-cards">
                     {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} />)}
                 </div>
-                {!selectedPkm && <div className="dex-container">
-                    <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 10)}>More</button>
+                {!selectedPkm && !loading && <div className="dex-container">
+                    <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 6)}>More</button>
                 </div>}
                 </>
             )
         }else{
-            return(
-                <div className="dex-container">
-                    <p>No result...</p>
-                </div>
-            )
+            if(!loading){
+                return(
+                    <div className="dex-container">
+                        <p>No result...</p>
+                    </div>
+                )
+            }
+
         }
     }
 
@@ -139,6 +147,7 @@ export default function Pokedex(){
             </div>}
             <section className="results">
                 {_renderPkm()}
+                {loading ? <img src={loadingImg}/> : null}
             </section>
         </div>
     )

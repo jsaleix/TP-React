@@ -12,7 +12,7 @@ export default function PokemonNews({data}){
                     <p>{published_date}</p>
                 </div>
                 <p>{summary.substring(0, 450)}...</p>
-                <a className="btn" href={link} >{rights}</a>
+                <a className="article-btn" href={link} >{rights}</a>
             </div>  
         </article>
     )

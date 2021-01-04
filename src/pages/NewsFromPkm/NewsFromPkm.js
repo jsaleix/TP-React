@@ -4,6 +4,7 @@ import PokemonNews from '../../components/PokemonNews/PokemonNews';
 import { PKM_GET_LIST, MAX_PKM_NB, NEWS_SEARCH, NEWS_API_KEY } from '../../conf.js'; 
 import '../../App.css'; 
 import './NewsFromPkm.css';
+import loadingImg from '../../assets/loading.gif' // relative path to image 
 
 export default function NewsFromPkm(){
     const [ loading, setLoading] = useState(true);
@@ -118,7 +119,8 @@ export default function NewsFromPkm(){
                 </div>
             </div>}
             <section className="results">
-                {_renderPkm()}
+                {loading ? <img src={loadingImg}/> : _renderPkm()}
+                
             </section>
         </div>
     )
