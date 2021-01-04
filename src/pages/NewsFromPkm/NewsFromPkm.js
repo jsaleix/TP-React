@@ -10,7 +10,7 @@ export default function NewsFromPkm(){
     const [ loading, setLoading] = useState(true);
     const [ pkmList, setPkmList] = useState(null);
     const [ offSet, setOffSet ]  = useState("0");
-    const [ limit, setLimit ]    = useState(10);
+    const [ limit, setLimit ]    = useState(6);
     const [ lang, setLang ]      = useState("en");
     const [selectedPkm, setSelectedPkm] = useState(null);
     const [ extraData, setExtraData ]   = useState(null);
@@ -30,10 +30,11 @@ export default function NewsFromPkm(){
                 tmpList.push(newPkm);
             })
             setPkmList(tmpList);
+            setLoading(false);
         }catch(e){
             console.error(e);
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     const fetchNews = async () => {
@@ -75,7 +76,7 @@ export default function NewsFromPkm(){
                     {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} extraType="news" />)}
                 </div>
                 {!selectedPkm && <div className="dex-container">
-                    <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 10)}>More</button>
+                    <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 6)}>More</button>
                 </div>}
                 </>
             )
@@ -98,6 +99,7 @@ export default function NewsFromPkm(){
 
     useEffect( () => {
         if(selectedPkm){
+            setExtraData(null);
             fetchNews();
         }
     }, [selectedPkm]);
@@ -119,7 +121,8 @@ export default function NewsFromPkm(){
                 </div>
             </div>}
             <section className="results">
-                {loading ? <img src={loadingImg}/> : _renderPkm()}
+                {_renderPkm()}
+                {loading ? <img src={loadingImg}/> : null }
                 
             </section>
         </div>
