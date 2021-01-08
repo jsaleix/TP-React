@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import Route from './components/Route/Route.js';
 import Header from './components/Header/Header.js';
@@ -8,14 +9,13 @@ import Pokedex from './pages/Pokedex/Pokedex.js';
 import NewsFromPkm from './pages/NewsFromPkm/NewsFromPkm.js';
 import News from './pages/News/News.js';
 import NotFound from './pages/404/404.js';
-import { useEffect } from 'react';
 
 function App() {
-  var validUrls = ["/", "/pokedex", "/news", "/pokeNews", "/404"]
+  var validUrls = ["/", "/pokedex", "/news", "/pokeNews", "/404"];
 
   useEffect(()=> {
     if(!validUrls.includes(window.location.pathname)){
-      window.location.replace("/404")
+      window.location.replace("/404");
     }
   }, []);
 
@@ -27,7 +27,6 @@ function App() {
       <Route path="/news" component={News}/>
       <Route path="/pokeNews" component={NewsFromPkm}/>
       <Route path="/404" component={NotFound}/>
-      <Route path="" notFound={true} component={NotFound}/>
       <Footer/>
     </>
   );

@@ -1,8 +1,3 @@
-export default function Route({path, component, notFound= false}){
-    if(window.location.pathname === path){
-        return component()
-    }else{
-        return null
-    }
-   
+export default function Route({path, component}){
+    return window.location.pathname === path ? component() : null;
 }

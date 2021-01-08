@@ -14,7 +14,7 @@ export default function PokedexExtraData({data}){
             }
         });
         if(tmpDescriptions.length > 0 ){
-            return( tmpDescriptions.map((desc) => <p>{desc.text} ({desc.version})</p>) )
+            return( tmpDescriptions.map((desc) => <p key={desc.version}>{desc.text} ({desc.version})</p>) )
         }else{
             return( <p>No description available in this language</p> )
         }
@@ -29,7 +29,7 @@ export default function PokedexExtraData({data}){
     const _renderTypes = () => {
         return(
             <div className="types-container">
-                {types.map( (type) => <img src={PKM_TYPE + type + ".svg"}/>)}
+                {types.map( (type) => <img key={type} src={PKM_TYPE + type + ".svg"}/>)}
             </div>
         )
     }
@@ -43,16 +43,16 @@ export default function PokedexExtraData({data}){
                     if(i< 3){
                         i++;
                         return(
-                            <p className="anim-delay-500ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>
+                            <p key={name.lang} className="anim-delay-500ms" onMouseOver={() => setLang(name.lang)} >{name.name} ({name.lang})</p>
                         )
                     }else if(i<6){
                         i++;
-                        return (<p className="anim-delay-1000ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                        return (<p key={name.lang} className="anim-delay-1000ms" onMouseOver={() => setLang(name.lang)} >{name.name} ({name.lang})</p>)
                     }else if(i<9){
                         i++;
-                        return (<p className="anim-delay-1500ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                        return (<p key={name.lang} className="anim-delay-1500ms" onMouseOver={() => setLang(name.lang)} >{name.name} ({name.lang})</p>)
                     }else{
-                        return (<p className="anim-delay-2000ms" onMouseOver={() => setLang(name.lang)} key={name.name} >{name.name} ({name.lang})</p>)
+                        return (<p key={name.lang} className="anim-delay-2000ms" onMouseOver={() => setLang(name.lang)} >{name.name} ({name.lang})</p>)
                     }
                 })}
             </div>
@@ -76,5 +76,4 @@ export default function PokedexExtraData({data}){
         </div>
     )
 
-    return null
 }
