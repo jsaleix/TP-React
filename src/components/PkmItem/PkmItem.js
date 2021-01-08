@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './PkmItem.css';
 import { PKM_DEF_PICTURE, PKM_PICTURE, MAX_PKM_NB } from '../../conf.js';
+import closeIcn from '../../assets/close.svg' // relative path to image 
 
 export default function PkmItem({data, action, selectedPkm, extraData, extraType = "pkm"}){
     if(data.id < MAX_PKM_NB){
@@ -48,10 +49,15 @@ export default function PkmItem({data, action, selectedPkm, extraData, extraType
 
 {/*<article className={selectedPkm === data.id ? "pkm-card" : "pkm-card"} onClick={() => _clickOnPkm() }>*/}
     return(
-        <article className={whichClass()} onClick={() => _clickOnPkm() }>
-            <img src={imgLink } className="pkm-picture" alt="pkm-pic"/>
+        <article className={whichClass()} onClick={() => whichClass() === "selected" ? null :  _clickOnPkm() }>
+            <div className="pkmImg">
+                {whichClass() === "selected" && <button id="closeIcn" onClick={() => _clickOnPkm()}/> }
+                <img src={imgLink} className="pkm-picture" alt="pkm-pic"/>
+            </div>
             <h2>{data.id} - {data.name}</h2>
             {_displayExtraData()}
         </article>
     )
 }
+
+//<img src={"../../assets/close.svg"} /></button>
