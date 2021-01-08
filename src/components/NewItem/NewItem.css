@@ -52,3 +52,15 @@
     color: #2b7d94;
     font-weight: bolder;
 }
+
+@media screen and (max-width: 1200px){
+    .news-card{
+        max-width: 90vw;
+        padding: 5px;
+        padding-right: 10px;
+    }
+    .news-card .news-details{
+        flex-wrap: wrap;
+    }
+
+}

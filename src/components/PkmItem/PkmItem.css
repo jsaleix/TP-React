@@ -20,7 +20,7 @@
 }
 
 .selected{
-    z-index: 10000;
+    z-index: 150;
     text-align: center;
     margin-bottom: 5em;
     transition: 0.5s;

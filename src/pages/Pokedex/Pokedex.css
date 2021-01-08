@@ -29,3 +29,15 @@
 .filters-container div{
   margin-right: 5em;
 }
+
+@media screen and (max-width: 1200px){
+  .pkm-cards{
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width:640px){
+
+}

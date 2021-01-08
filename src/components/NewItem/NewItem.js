@@ -1,6 +1,8 @@
 import './NewItem.css';
 
 export default function NewItem({data}){
+    var { summary } = data ;
+
     return(
         <>
             {/*<p>{JSON.stringify(data)}</p>*/}
@@ -13,10 +15,10 @@ export default function NewItem({data}){
                 </div>
 
                 <div>
-                    <p>{data.summary}</p>
+                    <p id="news-summary">{summary.length > 156 ? summary.substr(0, 156) + "..." : summary }</p>
                     <p className="btn">Source: <a href={data.link} >{data.rights}</a></p>
-                    
-                </div>    
+                </div>   
+                 
                 <img src={data.media || "https://cdn03.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_ds_22/H2x1_NDS_PokemonPlatinum_frFR_bannerXS.jpg"}/>
             </article>
         </>

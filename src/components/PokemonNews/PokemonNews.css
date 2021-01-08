@@ -85,3 +85,20 @@
 .article-item-content .article-btn:hover{
     background-color: rgb(3, 148, 148);
 }
+
+@media screen and (max-width: 1200px){
+    .article-item{
+        max-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .article-item img{
+        height: 180px;
+        width: 300px;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+    
+}
