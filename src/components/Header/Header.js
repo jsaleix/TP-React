@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './Header.css';
-import logo from '../../assets/logo.gif' // relative path to image 
+import logo from '../../assets/logo.gif'
 
 export default function Header(){
     const [btnClass, setBtnClass] = useState(false);

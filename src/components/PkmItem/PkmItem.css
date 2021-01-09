@@ -54,7 +54,7 @@
     border: none;
     -webkit-mask: url("../../assets/close-button.svg") no-repeat center;
     mask: url("../../assets/close-button.svg") no-repeat center;
-    background-color: red;
+    background-color: #E04F5F;
     background-size: cover;
 
     display: flex;
@@ -62,7 +62,6 @@
     outline: none;
     align-self: flex-end;
     transition: 0.5s;
-    transform: scale(2.5, 2.5);
     box-shadow: none;
     width: 80px;
     height: 80px;
@@ -72,6 +71,9 @@
 #closeIcn:hover{
     transition: 0.5s;
     background-color: rgb(109, 2, 2);
-    transform: scale(2.8, 2.8);
+    transform: scale(1.1, 1.1);
+    border: none;
+    box-shadow: none;
+
 }
 

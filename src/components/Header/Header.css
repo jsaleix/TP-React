@@ -94,7 +94,7 @@ header nav a{
         top: 0;
 		left: 110%;
 		padding-top: 80px;
-        transition: left 1s;
+        transition: left 0.5s;
         background-color:#20232a;
         overflow-y: hidden;
         overflow-x: hidden;

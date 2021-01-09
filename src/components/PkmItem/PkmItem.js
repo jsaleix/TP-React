@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './PkmItem.css';
 import { PKM_DEF_PICTURE, PKM_PICTURE, MAX_PKM_NB } from '../../conf.js';
-import closeIcn from '../../assets/close.svg' // relative path to image 
 
 export default function PkmItem({data, action, selectedPkm, extraData, extraType = "pkm"}){
     if(data.id < MAX_PKM_NB){
