@@ -1,0 +1,15 @@
+.filters-container img{
+    width: 3em;
+    transition: 0.5s;
+}
+
+.filters-container button{
+    outline: none;
+    background: none;
+    border: none;
+}
+
+.filters-container img:hover{
+    transform: scale(1.2, 1.2);
+    cursor: pointer;
+}

@@ -90,12 +90,33 @@ export default function Pokedex(){
         }
     }
 
+    const _setLastSeen = (data) => {
+        if(data){
+            var currHistoric = [];
+            var newHistoric  = [];
+
+            for(var i=0; i<3; i++){
+                if(localStorage.getItem(`pkm${i}`) && localStorage.getItem(`pkm${i}`) !== data ){
+                    currHistoric[i] = localStorage.getItem(`pkm${i}`);
+                }
+            }
+            newHistoric = [data].concat(currHistoric); 
+
+            for(var i=0; i<3; i++){
+                if(newHistoric[i]){
+                    localStorage.setItem(`pkm${i}`, newHistoric[i]);
+                }
+            }
+
+        }
+    }
+
     const _renderPkm = () => {
         if(pkmList){
             return(
                 <>
                 <div className="pkm-cards">
-                    {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} />)}
+                    {pkmList.map((pkm) => <PkmItem key={pkm.id} data={pkm} action={setSelectedPkm} selectedPkm={selectedPkm} extraData={() => _pkmData()} passPkmData={_setLastSeen} />)}
                 </div>
                 {!selectedPkm && !loading && <div className="dex-container">
                     <button className="cta-button cta-button--green" type="button" onClick={() => setLimit(limit + 6)}>More</button>

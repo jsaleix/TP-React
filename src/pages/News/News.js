@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './News.css'
 import NewItem from '../../components/NewItem/NewItem';
+import MiniPkmItem from '../../components/MiniPkmItem/MiniPkmItem';
 import { NEWS_SEARCH, NEWS_FREE_SEARCH, NEWS_API_KEY } from '../../conf.js'; 
 import loadingImg from '../../assets/loading.gif'
 import NoContent from '../../assets/noName2.gif' 
@@ -11,6 +12,7 @@ export default function News(){
     const [ lang, setLang ]         = useState("en");
     const [ search, setSearch ]     = useState("pokemon");
     const [ newsList, setNewsList]  = useState(null);
+    const [ lastSeen, setLastSeen]  = useState(null);
     var availableLang               = ["en", "fr", "es", "ja", "kn", "ru", "de"];
 
     const fetchNews = async () => {
@@ -59,6 +61,41 @@ export default function News(){
         }
     }
 
+    const _displayLastSeen = () => {
+        if(lastSeen){
+            console.log(lastSeen)
+            return(
+                lastSeen.map((pkm) => <MiniPkmItem key={pkm} data={pkm} action={setSearch} />)
+            )
+        }
+
+    }
+
+    const _loadSeenPkms = () => {
+        setLastSeen(null);
+        var pkm = [];
+
+        for(var i=0; i<3; i++){
+            if(localStorage.getItem(`pkm${i}`)){
+                pkm[i] = localStorage.getItem(`pkm${i}`);
+            }
+        }
+        setLastSeen(pkm);
+    }
+
+    useEffect(()=> {
+
+        window.addEventListener('storage', _loadSeenPkms())
+    
+        return () => {
+        window.removeEventListener('storage', _loadSeenPkms())
+        }
+    });
+
+    useEffect(() => {
+        _loadSeenPkms();
+    }, [])
+
     useEffect(()=> {
         fetchNews();
     }, [lang, search]);
@@ -80,6 +117,8 @@ export default function News(){
                     <label>Topic </label>
                     <input type="text" onChange={(e) => _handleInput(e.target.value, "search")} value={search}/>
                 </div>
+
+                {_displayLastSeen()}
             </div>
             <section className="results">
                 {loading ? <img src={loadingImg}/> : _renderNews()}

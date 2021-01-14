@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PkmItem.css';
 import { PKM_DEF_PICTURE, PKM_PICTURE, MAX_PKM_NB } from '../../conf.js';
 
-export default function PkmItem({data, action, selectedPkm, extraData, extraType = "pkm"}){
+export default function PkmItem({data, action, selectedPkm, extraData, extraType = "pkm", passPkmData}){
     if(data.id < MAX_PKM_NB){
         if(data.id > 719 ){
             var imgLink = `${PKM_DEF_PICTURE}${data.id}.png`;
@@ -22,6 +22,7 @@ export default function PkmItem({data, action, selectedPkm, extraData, extraType
                 action(data.name);
             }else{
                 action(data.id);
+                passPkmData(`${data.id}-${data.name}`)
             }
         }
     }

@@ -22,3 +22,6 @@ export { PKM_TYPE }
 
 var MAX_PKM_NB = 898;
 export { MAX_PKM_NB }
+
+var PKM_ICON_IMAGE = "https://www.serebii.net/pokedex-swsh/icon/";
+export { PKM_ICON_IMAGE }
