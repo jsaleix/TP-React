@@ -85,12 +85,12 @@ export default function News(){
 
     useEffect(()=> {
 
-        window.addEventListener('storage', _loadSeenPkms())
+        //window.addEventListener('storage', _loadSeenPkms())
     
-        return () => {
+        /*return () => {
         window.removeEventListener('storage', _loadSeenPkms())
-        }
-    });
+        }*/
+    }, []);
 
     useEffect(() => {
         _loadSeenPkms();
